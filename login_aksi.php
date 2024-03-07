@@ -14,14 +14,37 @@
     
     //cek data
     $cek=mysqli_num_rows($ambildata);
-    if($cek>0)
+
+    if($cek > 0)
+
+    $data = mysqli_fetch_assoc($ambildata);
+
+if($data['level']=="1")
+
     {
         $_SESSION['username']=$username;
         $_SESSION['status']='login';
-        header("location:admin/index.php");
+        $_SESSION['level']='1';
+        header("location:admin/index.php?page=home");
+      
+    }
+    else if($data['level']=="2"){
+        $_SESSION['username']=$username;
+        $_SESSION['status']='login';
+        $_SESSION['level']='2';
+        header("location:siswa/index.php?page=home");
+      
+    }
+    else if($data['level']=="3"){
+        $_SESSION['username']=$username;
+        $_SESSION['status']='login';
+        $_SESSION['level']='3';
+        header("location:petugas/index.php?page=home");
+
     }
     else
     {
-        header("location:index.php?pesan=gagal");
+       header        ("location:index.php?pesan=gagal");
+      
     }
 ?>
